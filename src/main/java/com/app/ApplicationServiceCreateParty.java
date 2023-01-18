@@ -4,6 +4,9 @@
  */
 package com.app;
 
+import com.app.application.cif.CreateParty;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/api/cif/v1/party")
 public class ApplicationServiceCreateParty {
+    
+    @Autowired
+    private CreateParty createParty;
+    
+    
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<?> createParty() {
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body("Created Party Object");
+        Optional<String> cParty = createParty.createParty();
+        if (cParty.isPresent()){
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(cParty.get());
+        }else{
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body("Unable to create Party");
+        }
     }
 }
