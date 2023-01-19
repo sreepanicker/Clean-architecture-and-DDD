@@ -1,5 +1,9 @@
 #  Clean-Architecture-and-DDD 
 
+## What is Clean Architecture ?
+> According to Robert C Martin - business rules are testable by design and independent of frameworks, databases, UI technologies, and other external applications or interfaces.
+
+
 This program(Spring Boot) demonstrates how to develop applications based on Clean Architecture principles. It also shows Domain entities and value objects from Domain Driven Design principles. Another important aspect of this application is it follows vertical slicing architecture.
 
 Application source code is structured into three primary packages, namely.
