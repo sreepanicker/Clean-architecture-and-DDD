@@ -5,7 +5,7 @@
 package com.app;
 
 import com.app.application.cif.FindParty;
-import com.app.application.cif.convertor.PartyDTO;
+import com.app.application.cif.convertor.FindPartyDTO;
 import java.util.Optional;
 import static org.hamcrest.CoreMatchers.containsString;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,11 +36,11 @@ public class ApplicationControllerFindPartyTest {
     @MockBean
     private FindParty findParty;
     
-    PartyDTO partyDTO;
+    FindPartyDTO partyDTO;
     
     @BeforeEach
     public void createPartyDto(){
-        partyDTO = new PartyDTO();
+        partyDTO = new FindPartyDTO();
         partyDTO.setId("20");
         partyDTO.setType("JOIN");       
     }

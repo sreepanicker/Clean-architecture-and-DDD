@@ -6,7 +6,7 @@ package com.app.application;
 
 import com.app.application.cif.FindParty;
 import com.app.application.cif.convertor.ConvertPartyToPartyDTO;
-import com.app.application.cif.convertor.PartyDTO;
+import com.app.application.cif.convertor.FindPartyDTO;
 import com.app.application.cif.ports.ICifRepository;
 import com.app.domain.cif.Party;
 import com.app.domain.cif.Type;
@@ -45,14 +45,14 @@ public class FindPartyServiceTest {
         party.setType(Type.SINGLE);
         party.updateAddress("92 Toronto Rd, Toronto, Ontario,Canada L1N 9L1");
         
-        PartyDTO partyDTOobj = new PartyDTO();
+        FindPartyDTO partyDTOobj = new FindPartyDTO();
         partyDTOobj.setId("20");
         
         when(cifReporty.findPartyById("20")).thenReturn( Optional.of(party));
         
         when(cPartyDTO.convert(party)).thenReturn(partyDTOobj);
          
-        Optional<PartyDTO> partyDTO= findParty.findPartyByid("20");
+        Optional<FindPartyDTO> partyDTO= findParty.findPartyByid("20");
       
         assert(partyDTO).get().getId().equals("20");
        // when(cPartyDTO.convert(party)).
@@ -65,7 +65,7 @@ public class FindPartyServiceTest {
         party.setType(Type.SINGLE);
         
         when(cifReporty.findPartyById("50")).thenReturn( Optional.empty());
-        Optional<PartyDTO> partyDTO= findParty.findPartyByid("50");
+        Optional<FindPartyDTO> partyDTO= findParty.findPartyByid("50");
         
         assert(partyDTO).isEmpty();
         

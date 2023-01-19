@@ -5,7 +5,7 @@
 package com.app.application.cif;
 
 import com.app.application.cif.convertor.ConvertPartyToPartyDTO;
-import com.app.application.cif.convertor.PartyDTO;
+import com.app.application.cif.convertor.FindPartyDTO;
 import com.app.application.cif.ports.ICifRepository;
 import com.app.domain.cif.Party;
 import java.util.Optional;
@@ -28,15 +28,15 @@ public class FindParty {
     @Autowired
     private ConvertPartyToPartyDTO cPartyDTO;
 
-    public Optional<PartyDTO> findPartyByid(String partyId) {
+    public Optional<FindPartyDTO> findPartyByid(String partyId) {
         Optional<Party> optParty = cifReporty.findPartyById(partyId);
         if (optParty.isPresent()) {            
             Party party = optParty.get();
             if (party.validateKYC()){
-                PartyDTO partyDTO= cPartyDTO.convert(party);
+                FindPartyDTO partyDTO= cPartyDTO.convert(party);
                 return Optional.of(partyDTO);
             }else{
-                PartyDTO partyDTO= new PartyDTO();
+                FindPartyDTO partyDTO= new FindPartyDTO();
                 partyDTO.setId(partyId);
                 partyDTO.setErrorMessage("Address Validation failed");
                 return Optional.of(partyDTO);

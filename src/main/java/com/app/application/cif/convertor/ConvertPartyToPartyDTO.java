@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConvertPartyToPartyDTO {
     
-    public PartyDTO convert(Party party){
-        PartyDTO partyDTO = new PartyDTO();
+    public FindPartyDTO convert(Party party){
+        FindPartyDTO partyDTO = new FindPartyDTO();
         partyDTO.setId(party.getId());
         partyDTO.setType(party.getType().name());
         partyDTO.setErrorMessage("");

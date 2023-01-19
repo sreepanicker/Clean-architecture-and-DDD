@@ -4,7 +4,7 @@
 package com.app;
 
 import com.app.application.cif.FindParty;
-import com.app.application.cif.convertor.PartyDTO;
+import com.app.application.cif.convertor.FindPartyDTO;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -32,11 +32,11 @@ public class ApplicationServiceFindParty {
     @RequestMapping(value="/{id}",method = RequestMethod.GET)
     public ResponseEntity<?> findParty(@PathVariable String id){
         
-        Optional<PartyDTO> partyData = findParty.findPartyByid(id);
+        Optional<FindPartyDTO> partyData = findParty.findPartyByid(id);
         if ( partyData.isEmpty()){
             return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body("Invaild Party Id : " + id);
         }else{
-            PartyDTO partyDTO = partyData.get();
+            FindPartyDTO partyDTO = partyData.get();
             return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(partyDTO);
         }
       

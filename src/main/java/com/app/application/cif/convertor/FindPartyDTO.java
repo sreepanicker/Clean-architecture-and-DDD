@@ -8,7 +8,7 @@ package com.app.application.cif.convertor;
  *
  * @author sreep
  */
-public class PartyDTO {
+public class FindPartyDTO {
     private String id;
     private String type;
     
