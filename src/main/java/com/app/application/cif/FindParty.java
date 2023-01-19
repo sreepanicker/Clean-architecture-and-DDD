@@ -36,7 +36,10 @@ public class FindParty {
                 PartyDTO partyDTO= cPartyDTO.convert(party);
                 return Optional.of(partyDTO);
             }else{
-                
+                PartyDTO partyDTO= new PartyDTO();
+                partyDTO.setId(partyId);
+                partyDTO.setErrorMessage("Address Validation failed");
+                return Optional.of(partyDTO);
             }
            
         }

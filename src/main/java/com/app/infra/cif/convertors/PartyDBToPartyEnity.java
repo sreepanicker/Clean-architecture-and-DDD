@@ -24,6 +24,7 @@ public class PartyDBToPartyEnity {
         }else{
            party.setType(Type.SINGLE); 
         }
+        party.updateAddress(partyDB.getAddress());
         return party;
     }
     

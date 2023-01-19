@@ -18,6 +18,7 @@ public class ConvertPartyToPartyDTO {
         PartyDTO partyDTO = new PartyDTO();
         partyDTO.setId(party.getId());
         partyDTO.setType(party.getType().name());
+        partyDTO.setErrorMessage("");
         return partyDTO;
     }
 }

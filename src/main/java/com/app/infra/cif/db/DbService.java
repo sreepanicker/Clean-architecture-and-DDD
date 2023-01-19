@@ -11,18 +11,19 @@ import org.springframework.stereotype.Repository;
  *
  * @author sreep
  */
-
 //just for autowiring 
 @Repository
 public class DbService implements IDbService {
 
     @Override
     public PartyDB select(String id) {
-       if (id.contains("5")){
-           return null;
-       }
-       return new PartyDB(id,"JOINT","2010-01-12");
-       
+        if (id.contains("5")) {
+            return null;
+        } else if (id.contains("7")) {
+             return new PartyDB(id, "JOINT", "2010-01-12",null);
+        }
+        return new PartyDB(id, "JOINT", "2010-01-12","92 Toronto Rd, Toronto, Ontario,Canada L1N 9L1");
+
     }
-    
+
 }

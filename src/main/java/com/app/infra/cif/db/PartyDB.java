@@ -12,11 +12,21 @@ public class PartyDB {
     private String id;
     private String type;
     private String creationDateTime;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     
-    public PartyDB(String id, String type, String creationDateTime){
+    public PartyDB(String id, String type, String creationDateTime, String address){
         this.id =id;
         this.type = type;
         this.creationDateTime = creationDateTime;
+        this.address =address;
     }
 
     public String getId() {

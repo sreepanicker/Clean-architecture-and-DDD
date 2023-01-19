@@ -21,6 +21,7 @@ public class Party {
        return address!=null && type!=null;
     }
     
+    //TODO Implement the Split functionality 
     public Party[] split(){
         return new Party[2];
     }

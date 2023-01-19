@@ -11,6 +11,16 @@ package com.app.application.cif.convertor;
 public class PartyDTO {
     private String id;
     private String type;
+    
+    private String errorMessage;
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
     public String getId() {
         return id;
