@@ -31,6 +31,8 @@ public class ApplicationControllerFindPartyTest {
     @Autowired
     private MockMvc mockMvc;
     
+    //only injuct the Bean related to weblayer into the application context; limited
+    //in SpringBootTest ; statrt the application context; integration test
     @MockBean
     private FindParty findParty;
     

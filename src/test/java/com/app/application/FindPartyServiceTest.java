@@ -28,6 +28,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class FindPartyServiceTest {
     
+    //Usecase in context, i.e FindParty ; requires additional mock object inside it; they are injucted using mock annotation
     @InjectMocks
     FindParty findParty;
     
