@@ -58,7 +58,7 @@ public class ApplicationControllerFindPartyTest {
     public void findAPartyInvaild() throws Exception{
       
        when(findParty.findPartyByid("5")).thenReturn( Optional.empty());
-       mockMvc.perform(get("/api/cif/v1/party/20"))
+       mockMvc.perform(get("/api/cif/v1/party/5"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(containsString("Invaild ")));
