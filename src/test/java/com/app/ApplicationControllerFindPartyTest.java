@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * This Test case won't load the Server , only use the mock bean to perform the test
  */
 @WebMvcTest(ApplicationServiceFindParty.class)
-public class ApplicationServiceFindPartyTest {
+public class ApplicationControllerFindPartyTest {
     
     @Autowired
     private MockMvc mockMvc;
