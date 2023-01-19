@@ -14,9 +14,11 @@ package com.app.domain.cif;
 public class Party {
     private String id ;
     private Type type;
+    private String address;
     
+    //Address should be a valid physical address
     public boolean validateKYC (){
-        return true;
+       return address!=null && type!=null;
     }
     
     public Party[] split(){
@@ -39,6 +41,9 @@ public class Party {
         this.type = type;
     }
     
+    public void updateAddress(String address){
+        this.address = address;
+    }
     
     
 }

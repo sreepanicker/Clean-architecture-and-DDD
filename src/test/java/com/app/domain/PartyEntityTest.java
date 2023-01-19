@@ -5,6 +5,7 @@
 package com.app.domain;
 
 import com.app.domain.cif.Party;
+import com.app.domain.cif.Type;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -17,6 +18,9 @@ public class PartyEntityTest {
     public void validateKyc(){
         
         Party party = new Party();
+        party.setId("20");
+        party.setType(Type.SINGLE);
+        party.updateAddress("92 Toronto Rd, Toronto, Ontario,Canada L1N 9L1");
         assert(party).validateKYC();
         
     }

@@ -42,6 +42,7 @@ public class FindPartyServiceTest {
         Party party = new Party();
         party.setId("20");
         party.setType(Type.SINGLE);
+        party.updateAddress("92 Toronto Rd, Toronto, Ontario,Canada L1N 9L1");
         
         PartyDTO partyDTOobj = new PartyDTO();
         partyDTOobj.setId("20");
