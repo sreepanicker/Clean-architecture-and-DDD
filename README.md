@@ -5,7 +5,7 @@
 
 ## About the Program  
 
-This program(Spring Boot) demonstrates how to develop applications based on Clean Architecture principles. It also shows Domain entities and value objects from Domain Driven Design principles. Another important aspect of this application is it follows vertical slicing architecture.
+This program(Spring Boot) demonstrates how to develop applications based on Clean Architecture principles and structure the codebase based on Hexagonal architecture by Alistair Cockburn. Also, the application showcases some of the Domain Driven concepts, such as  Domain entities, value objects, etc. Another important aspect of this application is it follows vertical slicing architecture.
 
 Application source code is structured into three primary packages, namely.
   * application - contains use cases, interfaces for infra layer 
