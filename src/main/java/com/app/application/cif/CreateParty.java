@@ -4,6 +4,7 @@
  */
 package com.app.application.cif;
 
+import com.app.application.cif.convertor.CreatePartyDTO;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CreateParty {
-    public Optional<String> createParty(){
-        return Optional.of("Party Created");
+    public Optional<CreatePartyDTO> createParty(CreatePartyDTO createPartyDTO){
+        
+        //TODO
+        //Convert the createPartyDTO to Party Entity
+        //Validate the KYC , if success then call repository otherwise set the errormessage 
+        // and send the object back to client
+        return Optional.of(createPartyDTO);
     }
     
 }

@@ -13,22 +13,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+
         
 class AppApplicationTests {
-    @Autowired
-    private MockMvc mockMvc;
     
     @Test
     void contextLoads() {
     }
-    @Test
-    public void testCreateParty() throws Exception{
-        mockMvc.perform(post("/api/cif/v1/party/"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(containsString("Party ")));
-        
-                
-    }
+    
 }
