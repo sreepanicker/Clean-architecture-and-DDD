@@ -5,7 +5,7 @@
 package com.app;
 
 import com.app.application.cif.CreateParty;
-import com.app.application.cif.convertor.CreatePartyDTO;
+import com.app.application.cif.convertor.ConvertCreatePartyObjects.CreatePartyData;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -28,8 +28,8 @@ public class ApplicationServiceCreateParty {
     
     
     @RequestMapping(value = "/", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createParty(@RequestBody CreatePartyDTO createPartyDTO) {        
-        Optional<CreatePartyDTO> cParty = createParty.createParty(createPartyDTO);
+    public ResponseEntity<?> createParty(@RequestBody CreatePartyData createPartyDTO) {        
+        Optional<CreatePartyData> cParty = createParty.createParty(createPartyDTO);
         if (cParty.isPresent()){
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(cParty.get());
         }else{

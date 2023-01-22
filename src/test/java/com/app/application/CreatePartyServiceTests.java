@@ -5,12 +5,17 @@
 package com.app.application;
 
 import com.app.application.cif.CreateParty;
-import com.app.application.cif.convertor.CreatePartyDTO;
+import com.app.application.cif.convertor.ConvertCreatePartyObjects;
+import com.app.application.cif.convertor.ConvertCreatePartyObjects.CreatePartyData;
+import com.app.domain.cif.Party;
+import com.app.domain.cif.Type;
 import java.util.Optional;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -25,23 +30,39 @@ public class CreatePartyServiceTests {
     @InjectMocks
     CreateParty createParty;
     
-    private CreatePartyDTO createPartyDTO;
+    @Mock
+    ConvertCreatePartyObjects convertor;
+    
+    private CreatePartyData createPartyDTO;
     
     @BeforeEach
     void init(){
-        createPartyDTO = new CreatePartyDTO();
-        createPartyDTO.setId("20");
-        createPartyDTO.setErrorMessage("");
+       // createParty = new CreateParty();
+        createPartyDTO = new CreatePartyData("20","join","72 Rd");
+      
     }
     
+    //This should return empty object
+    @Test
+    public void create_party_empty(){
+      
+      when(convertor.convert(createPartyDTO)).thenReturn(Optional.empty());
+        
+      Optional<CreatePartyData> createPartyOpt =   createParty.createParty(createPartyDTO);
+      //CreatePartyData partyDTO = createPartyOpt.get();
+      assert(createPartyOpt.isEmpty());
+    }
     
     @Test
-    public void create_party_test1(){
-      
-     // when(createParty.createParty()).thenReturn(Optional.of(createPartyDTO));
-        
-      Optional<CreatePartyDTO> createPartyOpt =   createParty.createParty(createPartyDTO);
-      CreatePartyDTO partyDTO = createPartyOpt.get();
-      assert(partyDTO.getErrorMessage().equals(""));
+    public void create_party_success(){
+        Party party = new Party();
+        party.setId("20");
+        party.setType(Type.JOINT);
+        party.updateAddress("72 ");
+        when(convertor.convert(createPartyDTO)).thenReturn(Optional.of(party));
+        Optional<CreatePartyData> createPartyOpt =   createParty.createParty(createPartyDTO);
+        CreatePartyData dTo = createPartyOpt.get();
+        assertThat(dTo.message().contains("Created"));
     }
+    
 }

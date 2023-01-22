@@ -5,7 +5,7 @@
 package com.app;
 
 import com.app.application.cif.CreateParty;
-import com.app.application.cif.convertor.CreatePartyDTO;
+import com.app.application.cif.convertor.ConvertCreatePartyObjects.CreatePartyData;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,11 +36,11 @@ public class ApplicationControllerCreatePartyTests {
     @MockBean
     private CreateParty createParty; 
     
-    private CreatePartyDTO createPartyDTO;
+    private CreatePartyData createPartyDTO;
     
     @BeforeEach
     void init(){
-        createPartyDTO = new CreatePartyDTO();
+        createPartyDTO = new CreatePartyData("id","Join","72 Rd");
     }
     
     @Test

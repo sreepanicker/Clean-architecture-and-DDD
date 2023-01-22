@@ -4,8 +4,12 @@
  */
 package com.app.application.cif;
 
-import com.app.application.cif.convertor.CreatePartyDTO;
+import com.app.application.cif.convertor.ConvertCreatePartyObjects;
+import com.app.application.cif.convertor.ConvertCreatePartyObjects.CreatePartyData;
+import com.app.domain.cif.Party;
+//import com.app.application.cif.convertor.CreatePartyDTO;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,13 +18,30 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CreateParty {
-    public Optional<CreatePartyDTO> createParty(CreatePartyDTO createPartyDTO){
-        
-        //TODO
-        //Convert the createPartyDTO to Party Entity
-        //Validate the KYC , if success then call repository otherwise set the errormessage 
-        // and send the object back to client
-        return Optional.of(createPartyDTO);
+
+    @Autowired
+    ConvertCreatePartyObjects convertor;
+
+    public Optional<CreatePartyData> createParty(CreatePartyData createPartyDTO) {
+
+ 
+        Optional<Party> optParty = convertor.convert(createPartyDTO);
+        if (!optParty.isEmpty()) {
+
+            //Validate the KYC
+            Party party = optParty.get();
+            if (party.validateKYC()) {
+                 //TODO
+                //Persist the data- call repository 
+                // repository.save()
+                // return success message 
+                CreatePartyData returnDTO = new CreatePartyData(createPartyDTO.id(),"Created successfully");
+               
+                return Optional.of(returnDTO);
+            }
+
+        }
+        return Optional.empty();
     }
-    
+
 }
