@@ -38,5 +38,14 @@ public class CifRepository implements ICifRepository {
         }
         return Optional.empty();
     }
-
+    
+    // Save opertion 
+    
+    //Logic 
+    // read the Party Domain Enitity
+    // Read the domain events
+    // Publish the domain events
+    //Event publish should  maintain the subscriber details
+    
+    
 }
