@@ -37,4 +37,7 @@ public class PartyEntity {
     public PartyEntity[] performSplit(){
         return   new PartyEntity[2]; 
     }
+    public List<Event> getEvents(){
+        return partyEvents;
+    }
 }
