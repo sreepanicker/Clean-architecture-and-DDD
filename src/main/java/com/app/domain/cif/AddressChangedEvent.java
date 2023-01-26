@@ -18,4 +18,8 @@ public class AddressChangedEvent extends Event {
         super();
         this.partyID = partyID;
     }
+    
+    public String eventDetails(){
+        return this.partyID;
+    }
 }
