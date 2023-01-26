@@ -9,7 +9,7 @@ This program(Spring Boot) demonstrates how to develop applications based on Clea
 
 Application source code is structured into three primary packages, namely.
   * application - contains use cases, interfaces for infra layer 
-  * domain - contains domain entities, domain logic, business rules,value objects, etc
+  * domain - contains domain entities, domain logic, business rules,value objects, domain events etc
   * infra - contains repository, data access logic, and ports(interface) implementations.
 
 Within these packages, we create an additional grouping for specific use cases; essentially, it screams about the intent. So, we are following screaming and vertical slicing architecture.
