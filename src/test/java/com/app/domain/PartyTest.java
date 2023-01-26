@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author sreep
  */
-public class PartyEntityTest {
+public class PartyTest {
     
     @Test
     public void validateKyc(){
