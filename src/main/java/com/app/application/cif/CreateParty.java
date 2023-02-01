@@ -6,6 +6,7 @@ package com.app.application.cif;
 
 import com.app.application.cif.convertor.ConvertCreatePartyObjects;
 import com.app.application.cif.convertor.ConvertCreatePartyObjects.CreatePartyData;
+import com.app.application.cif.ports.ICreateParty;
 import com.app.domain.cif.Party;
 //import com.app.application.cif.convertor.CreatePartyDTO;
 import java.util.Optional;
@@ -17,11 +18,12 @@ import org.springframework.stereotype.Service;
  * @author sreep
  */
 @Service
-public class CreateParty {
+public class CreateParty implements ICreateParty{
 
     @Autowired
     ConvertCreatePartyObjects convertor;
 
+    @Override
     public Optional<CreatePartyData> createParty(CreatePartyData createPartyDTO) {
 
  

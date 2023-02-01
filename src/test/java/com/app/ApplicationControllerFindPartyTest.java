@@ -4,8 +4,8 @@
  */
 package com.app;
 
-import com.app.application.cif.FindParty;
 import com.app.application.cif.convertor.FindPartyDTO;
+import com.app.application.cif.ports.IFindParty;
 import java.util.Optional;
 import static org.hamcrest.CoreMatchers.containsString;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,8 +36,11 @@ public class ApplicationControllerFindPartyTest {
     
     //only injuct the Bean related to weblayer into the application context; limited
     //in SpringBootTest ; statrt the application context; integration test
+   // @MockBean
+    //private FindParty findParty;
     @MockBean
-    private FindParty findParty;
+    private IFindParty findParty;
+    
     
     FindPartyDTO partyDTO;
     

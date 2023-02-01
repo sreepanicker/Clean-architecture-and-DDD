@@ -4,8 +4,8 @@
  */
 package com.app;
 
-import com.app.application.cif.CreateParty;
 import com.app.application.cif.convertor.ConvertCreatePartyObjects.CreatePartyData;
+import com.app.application.cif.ports.ICreateParty;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApplicationServiceCreateParty {
     
     @Autowired
-    private CreateParty createParty;
+    private ICreateParty createParty;
     
     
     @RequestMapping(value = "/", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)

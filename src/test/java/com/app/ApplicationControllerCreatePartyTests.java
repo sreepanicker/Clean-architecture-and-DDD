@@ -4,8 +4,8 @@
  */
 package com.app;
 
-import com.app.application.cif.CreateParty;
 import com.app.application.cif.convertor.ConvertCreatePartyObjects.CreatePartyData;
+import com.app.application.cif.ports.ICreateParty;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ public class ApplicationControllerCreatePartyTests {
     private MockMvc mockMVC;
     
     @MockBean
-    private CreateParty createParty; 
+    private ICreateParty createParty; 
     
     private CreatePartyData createPartyDTO;
     

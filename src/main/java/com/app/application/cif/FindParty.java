@@ -7,6 +7,7 @@ package com.app.application.cif;
 import com.app.application.cif.convertor.ConvertPartyToPartyDTO;
 import com.app.application.cif.convertor.FindPartyDTO;
 import com.app.application.cif.ports.ICifRepository;
+import com.app.application.cif.ports.IFindParty;
 import com.app.domain.cif.Party;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
  * Talks to the repository to get the details
  */
 @Service
-public class FindParty {
+public class FindParty implements IFindParty{
 
     //Talks to the Repository implementation to get the Party details 
     @Autowired
@@ -27,7 +28,7 @@ public class FindParty {
     
     @Autowired
     private ConvertPartyToPartyDTO cPartyDTO;
-
+    @Override
     public Optional<FindPartyDTO> findPartyByid(String partyId) {
         Optional<Party> optParty = cifReporty.findPartyById(partyId);
         if (optParty.isPresent()) {            

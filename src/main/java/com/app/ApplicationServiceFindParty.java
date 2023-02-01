@@ -3,8 +3,8 @@
  */
 package com.app;
 
-import com.app.application.cif.FindParty;
 import com.app.application.cif.convertor.FindPartyDTO;
+import com.app.application.cif.ports.IFindParty;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,7 +27,7 @@ public class ApplicationServiceFindParty {
     
     //Dependecy injection for Find Party service
     @Autowired
-    private FindParty findParty;
+    private IFindParty findParty;
     
     @RequestMapping(value="/{id}",method = RequestMethod.GET)
     public ResponseEntity<?> findParty(@PathVariable String id){
