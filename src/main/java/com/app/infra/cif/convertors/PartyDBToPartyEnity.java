@@ -5,6 +5,7 @@
 package com.app.infra.cif.convertors;
 
 import com.app.domain.cif.Party;
+import com.app.domain.cif.PartyEntity;
 import com.app.domain.cif.Type;
 import com.app.infra.cif.db.PartyDB;
 import org.springframework.stereotype.Component;
@@ -16,16 +17,16 @@ import org.springframework.stereotype.Component;
 @Component 
 public class PartyDBToPartyEnity {
     
-    public Party convert(PartyDB partyDB){
-        Party party = new Party();
-        party.setId(partyDB.getId());
+    public PartyEntity convert(PartyDB partyDB){
+        PartyEntity partyEntity ;  
+        
         if (partyDB.getType().equalsIgnoreCase("join")){
-            party.setType(Type.JOINT);
+            partyEntity = new PartyEntity(partyDB.getId(),Type.JOINT,partyDB.getAddress());
         }else{
-           party.setType(Type.SINGLE); 
+           partyEntity = new PartyEntity(partyDB.getId(),Type.SINGLE,partyDB.getAddress());
         }
-        party.updateAddress(partyDB.getAddress());
-        return party;
+        
+        return partyEntity;
     }
     
 }

@@ -9,9 +9,9 @@ import com.app.application.cif.convertor.ConvertPartyToPartyDTO;
 import com.app.application.cif.convertor.FindPartyDTO;
 import com.app.application.cif.ports.ICifRepository;
 import com.app.domain.cif.Party;
+import com.app.domain.cif.PartyEntity;
 import com.app.domain.cif.Type;
 import java.util.Optional;
-import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -40,17 +40,14 @@ public class FindPartyServiceTest {
     
     @Test
     public void should_find_party(){
-        Party party = new Party();
-        party.setId("20");
-        party.setType(Type.SINGLE);
-        party.updateAddress("92 Toronto Rd, Toronto, Ontario,Canada L1N 9L1");
+        PartyEntity partyEntity = new PartyEntity("20", Type.SINGLE, "Rd 360 address");
         
         FindPartyDTO partyDTOobj = new FindPartyDTO();
         partyDTOobj.setId("20");
         
-        when(cifReporty.findPartyById("20")).thenReturn( Optional.of(party));
+        when(cifReporty.findPartyById("20")).thenReturn( Optional.of(partyEntity));
         
-        when(cPartyDTO.convert(party)).thenReturn(partyDTOobj);
+        when(cPartyDTO.convert(partyEntity)).thenReturn(partyDTOobj);
          
         Optional<FindPartyDTO> partyDTO= findParty.findPartyByid("20");
       

@@ -4,7 +4,7 @@
  */
 package com.app.application.cif.ports;
 
-import com.app.domain.cif.Party;
+import com.app.domain.cif.PartyEntity;
 import java.util.Optional;
 
 /**
@@ -12,5 +12,5 @@ import java.util.Optional;
  * @author sreep
  */
 public interface ICifRepository {
-    public Optional<Party> findPartyById(String id);
+    public Optional<PartyEntity> findPartyById(String id);
 }

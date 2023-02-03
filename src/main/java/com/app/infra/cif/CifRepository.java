@@ -6,6 +6,7 @@ package com.app.infra.cif;
 
 import com.app.application.cif.ports.ICifRepository;
 import com.app.domain.cif.Party;
+import com.app.domain.cif.PartyEntity;
 import com.app.infra.cif.convertors.IDbService;
 import com.app.infra.cif.convertors.PartyDBToPartyEnity;
 import com.app.infra.cif.db.PartyDB;
@@ -30,11 +31,11 @@ public class CifRepository implements ICifRepository {
     private PartyDBToPartyEnity partyDbToEnity;
 
     @Override
-    public Optional<Party> findPartyById(String id) {
+    public Optional<PartyEntity> findPartyById(String id) {
         PartyDB partyDb = iDbService.select(id);
         if (!Objects.isNull(partyDb)) {
-            Party party = partyDbToEnity.convert(partyDb);
-            return Optional.of(party);
+            PartyEntity partyEntity = partyDbToEnity.convert(partyDb);
+            return Optional.of(partyEntity);
         }
         return Optional.empty();
     }

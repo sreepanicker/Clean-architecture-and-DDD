@@ -4,7 +4,9 @@
  */
 package com.app.application.cif.convertor;
 
-import com.app.domain.cif.Party;
+import com.app.domain.cif.PartyEntity;
+import com.app.domain.cif.Type;
+import java.lang.reflect.Field;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,12 +15,26 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ConvertPartyToPartyDTO {
-    
-    public FindPartyDTO convert(Party party){
+
+    public FindPartyDTO convert(PartyEntity partyEntity) {
         FindPartyDTO partyDTO = new FindPartyDTO();
-        partyDTO.setId(party.getId());
-        partyDTO.setType(party.getType().name());
-        partyDTO.setErrorMessage("");
+     
+        try {
+            //Reading the ID data 
+            Field field = PartyEntity.class.getDeclaredField("id");
+            field.setAccessible(true);
+            partyDTO.setId((String) field.get(partyEntity));
+            //Reading the type data 
+            field = PartyEntity.class.getDeclaredField("type");
+            field.setAccessible(true);
+            Type type = (Type)field.get(partyEntity);
+            partyDTO.setType(type.name());
+
+            partyDTO.setErrorMessage("");
+        } catch (Exception e) {
+            //throw exception ., need to handle the code 
+            System.out.println(e);
+        }
         return partyDTO;
     }
 }

@@ -9,6 +9,7 @@ import com.app.application.cif.convertor.FindPartyDTO;
 import com.app.application.cif.ports.ICifRepository;
 import com.app.application.cif.ports.IFindParty;
 import com.app.domain.cif.Party;
+import com.app.domain.cif.PartyEntity;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,11 +31,11 @@ public class FindParty implements IFindParty{
     private ConvertPartyToPartyDTO cPartyDTO;
     @Override
     public Optional<FindPartyDTO> findPartyByid(String partyId) {
-        Optional<Party> optParty = cifReporty.findPartyById(partyId);
+        Optional<PartyEntity> optParty = cifReporty.findPartyById(partyId);
         if (optParty.isPresent()) {            
-            Party party = optParty.get();
-            if (party.validateKYC()){
-                FindPartyDTO partyDTO= cPartyDTO.convert(party);
+            PartyEntity partyEntity = optParty.get();
+            if (partyEntity.performKYCValidation()){
+                FindPartyDTO partyDTO= cPartyDTO.convert(partyEntity);
                 return Optional.of(partyDTO);
             }else{
                 FindPartyDTO partyDTO= new FindPartyDTO();
