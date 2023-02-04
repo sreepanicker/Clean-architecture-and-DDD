@@ -48,5 +48,19 @@ public class CifRepository implements ICifRepository {
     // Publish the domain events
     //Event publish should  maintain the subscriber details
     
-    
+    @Override 
+    public boolean save(Optional<PartyEntity> optPartyEntity){
+        
+        if (!optPartyEntity.isEmpty()){
+            Optional<PartyDB> optPartyDB = partyDbToEnity.convert(optPartyEntity);
+             if (!optPartyDB.isEmpty()){
+                 PartyDB partyDB = optPartyDB.get();
+                 iDbService.insert(Optional.of(partyDB));
+                 // TODO publish events
+                 
+                 return true;
+             }            
+        }        
+        return false;
+    }  
 }

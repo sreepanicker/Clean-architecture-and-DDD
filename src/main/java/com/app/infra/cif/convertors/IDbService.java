@@ -5,6 +5,7 @@
 package com.app.infra.cif.convertors;
 
 import com.app.infra.cif.db.PartyDB;
+import java.util.Optional;
 
 /**
  *
@@ -12,4 +13,5 @@ import com.app.infra.cif.db.PartyDB;
  */
 public interface IDbService {
     public PartyDB select(String id);
+    public boolean insert(Optional<PartyDB> optPartyDB);
 }

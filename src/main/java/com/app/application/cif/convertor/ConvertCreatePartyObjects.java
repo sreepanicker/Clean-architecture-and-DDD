@@ -5,6 +5,7 @@
 package com.app.application.cif.convertor;
 
 import com.app.domain.cif.Party;
+import com.app.domain.cif.PartyEntity;
 import com.app.domain.cif.Type;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
@@ -32,12 +33,10 @@ public class ConvertCreatePartyObjects {
     }
     
     // Convert DTO to a Party Object 
-    public Optional<Party> convert(CreatePartyData dTO){
-        Party party = new Party();
-        party.setId(dTO.id());
-        party.setType(Type.valueOf(dTO.type.toUpperCase()));
-        party.updateAddress(dTO.address());
-        return Optional.of(party);
+    public Optional<PartyEntity> convert(CreatePartyData dTO){
+        Type type = dTO.type.equals("SINGLE")?Type.SINGLE:Type.JOINT;
+        PartyEntity partyEntity =  new PartyEntity(dTO.id,type, dTO.address());
+        return Optional.of(partyEntity);
     }
 
 }

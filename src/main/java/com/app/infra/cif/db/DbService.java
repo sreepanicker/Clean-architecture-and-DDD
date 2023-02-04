@@ -5,6 +5,7 @@
 package com.app.infra.cif.db;
 
 import com.app.infra.cif.convertors.IDbService;
+import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -25,5 +26,14 @@ public class DbService implements IDbService {
         return new PartyDB(id, "JOINT", "2010-01-12","92 Toronto Rd, Toronto, Ontario,Canada L1N 9L1");
 
     }
+    @Override
+    public boolean insert(Optional<PartyDB> opDb){
+        if (!opDb.isEmpty()){
+            PartyDB partyDB = opDb.get();
+            System.out.println(partyDB.getCreationDateTime());
+        }
+        return !opDb.isEmpty()? true:false;
+     }
+    
 
 }

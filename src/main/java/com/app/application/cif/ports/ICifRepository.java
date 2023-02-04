@@ -13,4 +13,5 @@ import java.util.Optional;
  */
 public interface ICifRepository {
     public Optional<PartyEntity> findPartyById(String id);
+    public boolean save(Optional<PartyEntity> optPartyEntity);
 }

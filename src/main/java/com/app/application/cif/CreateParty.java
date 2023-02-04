@@ -6,8 +6,9 @@ package com.app.application.cif;
 
 import com.app.application.cif.convertor.ConvertCreatePartyObjects;
 import com.app.application.cif.convertor.ConvertCreatePartyObjects.CreatePartyData;
+import com.app.application.cif.ports.ICifRepository;
 import com.app.application.cif.ports.ICreateParty;
-import com.app.domain.cif.Party;
+import com.app.domain.cif.PartyEntity;
 //import com.app.application.cif.convertor.CreatePartyDTO;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,28 +19,31 @@ import org.springframework.stereotype.Service;
  * @author sreep
  */
 @Service
-public class CreateParty implements ICreateParty{
+public class CreateParty implements ICreateParty {
 
     @Autowired
     ConvertCreatePartyObjects convertor;
+    @Autowired
+    ICifRepository cifReporty;
 
     @Override
     public Optional<CreatePartyData> createParty(CreatePartyData createPartyDTO) {
 
- 
-        Optional<Party> optParty = convertor.convert(createPartyDTO);
+        Optional<PartyEntity> optParty = convertor.convert(createPartyDTO);
         if (!optParty.isEmpty()) {
 
             //Validate the KYC
-            Party party = optParty.get();
-            if (party.validateKYC()) {
-                 //TODO
-                //Persist the data- call repository 
-                // repository.save()
-                // return success message 
-                CreatePartyData returnDTO = new CreatePartyData(createPartyDTO.id(),"Created successfully");
-               
-                return Optional.of(returnDTO);
+            PartyEntity partyEntity = optParty.get();
+            if (partyEntity.performKYCValidation()) {
+
+                boolean partyStatus = cifReporty.save(Optional.of(partyEntity));
+                if (partyStatus) {
+                    CreatePartyData returnDTO = new CreatePartyData(createPartyDTO.id(), "Created successfully");
+                    return Optional.of(returnDTO);
+                } else {
+                    CreatePartyData returnDTO = new CreatePartyData(createPartyDTO.id(), "Unable to create Party");
+                    return Optional.of(returnDTO);
+                }
             }
 
         }
