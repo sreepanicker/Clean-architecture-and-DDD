@@ -19,5 +19,8 @@ public abstract class Event {
         this.eventId = UUID.randomUUID();
         this.creationTime = LocalDateTime.now();
     }   
+    public String creationTime(){
+        return "UUID: "+ this.eventId + ", created at: " +creationTime.toString();
+    }
     
 }

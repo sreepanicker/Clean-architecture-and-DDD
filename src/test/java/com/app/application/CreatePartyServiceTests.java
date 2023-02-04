@@ -8,6 +8,7 @@ import com.app.application.cif.CreateParty;
 import com.app.application.cif.convertor.ConvertCreatePartyObjects;
 import com.app.application.cif.convertor.ConvertCreatePartyObjects.CreatePartyData;
 import com.app.application.cif.ports.ICifRepository;
+import com.app.domain.cif.PartyCreatedEvent;
 import com.app.domain.cif.PartyEntity;
 import com.app.domain.cif.Type;
 import java.util.Optional;
@@ -60,6 +61,25 @@ public class CreatePartyServiceTests {
     @Test
     public void create_party_success(){
         PartyEntity partyEntity =  new PartyEntity("20", Type.SINGLE, "Rd 360 address");
+        Optional<PartyEntity> opt = Optional.of(partyEntity);
+        //Mocking the convertor 
+        when(convertor.convert(createPartyDTO)).thenReturn(Optional.of(partyEntity));
+        //Mocking the repository 
+        when(ciftRepo.save(opt)).thenReturn(true);
+        
+        Optional<CreatePartyData> createPartyOpt =   createParty.createParty(createPartyDTO);
+        CreatePartyData dTo = createPartyOpt.get();
+        assert(dTo.message().contains("Created"));
+    }
+    
+    
+    @Test
+    public void create_party_success2(){
+        //Creating events and making sure events are in the party entity
+        PartyEntity partyEntity =  new PartyEntity("20", Type.SINGLE, "Rd 360 address");
+        PartyCreatedEvent event = new PartyCreatedEvent("20");
+        partyEntity.addNewEvents(event);
+        
         Optional<PartyEntity> opt = Optional.of(partyEntity);
         //Mocking the convertor 
         when(convertor.convert(createPartyDTO)).thenReturn(Optional.of(partyEntity));

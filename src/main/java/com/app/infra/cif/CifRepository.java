@@ -5,7 +5,7 @@
 package com.app.infra.cif;
 
 import com.app.application.cif.ports.ICifRepository;
-import com.app.domain.cif.Party;
+import com.app.domain.cif.PartyCreatedEvent;
 import com.app.domain.cif.PartyEntity;
 import com.app.infra.cif.convertors.IDbService;
 import com.app.infra.cif.convertors.PartyDBToPartyEnity;
@@ -13,6 +13,7 @@ import com.app.infra.cif.db.PartyDB;
 import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -29,6 +30,9 @@ public class CifRepository implements ICifRepository {
     //converter convert DB object to an Enity object, which has rules associated with. 
     @Autowired
     private PartyDBToPartyEnity partyDbToEnity;
+    
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Override
     public Optional<PartyEntity> findPartyById(String id) {
@@ -57,7 +61,15 @@ public class CifRepository implements ICifRepository {
                  PartyDB partyDB = optPartyDB.get();
                  iDbService.insert(Optional.of(partyDB));
                  // TODO publish events
-                 
+                 PartyEntity partyEntity = optPartyEntity.get();
+                 partyEntity.getEvents().forEach((e)->{                    
+                     if (e instanceof PartyCreatedEvent){
+                         applicationEventPublisher.publishEvent(e);                     
+                     }          
+                 });
+                 if (!partyEntity.getEvents().isEmpty()){
+                     partyEntity.getEvents().clear();
+                 }
                  return true;
              }            
         }        

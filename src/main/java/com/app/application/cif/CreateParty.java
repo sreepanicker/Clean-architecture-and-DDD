@@ -8,6 +8,7 @@ import com.app.application.cif.convertor.ConvertCreatePartyObjects;
 import com.app.application.cif.convertor.ConvertCreatePartyObjects.CreatePartyData;
 import com.app.application.cif.ports.ICifRepository;
 import com.app.application.cif.ports.ICreateParty;
+import com.app.domain.cif.PartyCreatedEvent;
 import com.app.domain.cif.PartyEntity;
 //import com.app.application.cif.convertor.CreatePartyDTO;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class CreateParty implements ICreateParty {
             //Validate the KYC
             PartyEntity partyEntity = optParty.get();
             if (partyEntity.performKYCValidation()) {
-
+                partyEntity.addNewEvents(new PartyCreatedEvent(createPartyDTO.id()));
                 boolean partyStatus = cifReporty.save(Optional.of(partyEntity));
                 if (partyStatus) {
                     CreatePartyData returnDTO = new CreatePartyData(createPartyDTO.id(), "Created successfully");

@@ -23,7 +23,7 @@ public class PartyEntity {
         this.id =id;
         this.type =partyType;
         this.address = address;
-        partyEvents = new ArrayList();
+        partyEvents = new ArrayList();       
     }
     
     public boolean performKYCValidation(){
@@ -39,5 +39,9 @@ public class PartyEntity {
     }
     public List<Event> getEvents(){
         return partyEvents;
+    }
+    public void addNewEvents(Event event){
+        partyEvents.add(event);
+        
     }
 }

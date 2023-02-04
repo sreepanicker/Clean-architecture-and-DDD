@@ -30,7 +30,7 @@ public class DbService implements IDbService {
     public boolean insert(Optional<PartyDB> opDb){
         if (!opDb.isEmpty()){
             PartyDB partyDB = opDb.get();
-            System.out.println(partyDB.getCreationDateTime());
+            System.out.println("Inserted Party ");
         }
         return !opDb.isEmpty()? true:false;
      }
