@@ -106,4 +106,25 @@ public class UpdatePartyAddressTests {
         //Assertions.assertEquals(1,partyEntity.getEvents().size());
     }
     
+     @Test
+    //No Party Entity returned 
+    // call to repository failed 
+    public void update_address_failed3(){
+        
+        UpdateAddressDTO addressDTO = new UpdateAddressDTO("30","9700 Adresss");
+        Optional<UpdateAddressDTO> optAddress = Optional.of(addressDTO);
+         
+        //NO Party Entity returned
+        
+        // Mocking the cif Repository call
+        Optional<PartyEntity> optPartyEnity = Optional.empty();
+        when(cifRepository.findPartyById(addressDTO.id())).thenReturn(optPartyEnity);
+              
+        // Now call the update address business logic , it should set the PartyEnity address to 9700 Address 
+        Optional<UpdateAddressDTO> updateaddress = updateAddress.updateAddress(optAddress);
+        System.out.println(updateaddress.get().message());
+        assert(updateaddress.get().message().contains("Failed"));
+        //Assertions.assertEquals(1,partyEntity.getEvents().size());
+    }
+    
 }
