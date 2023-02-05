@@ -14,4 +14,9 @@ Application source code is structured into three primary packages, namely.
 
 Within these packages, we create an additional grouping for specific use cases; essentially, it screams about the intent. So, we are following screaming and vertical slicing architecture.
 
+Currently, application implemented following usecases
+ * FindParty
+ * CreateParty
+ * UpdatePartyAddress
+
 Also, in the test folders, it demonstrates how to unit test the domain layer, application layer etc. The program uses Mockitio and Spring-started-test for unit and integration tests. 
