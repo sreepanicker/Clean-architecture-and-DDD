@@ -18,12 +18,12 @@ public class CifEvents {
     
     @EventListener
     public void processAddressChanged(AddressChangedEvent event){
-        System.out.println("event "+ event.eventDetails());
+        System.out.println("Event Processed, Address Changed: "+ event.eventDetails());
     }
     
     @EventListener
     public void processPartyCreated(PartyCreatedEvent event){
-        System.out.println("Event Processed, " + event.eventDetails());
+        System.out.println("Event Processed, Party Created: " + event.eventDetails());
     }
    
 }

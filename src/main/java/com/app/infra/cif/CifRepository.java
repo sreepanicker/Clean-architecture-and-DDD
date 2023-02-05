@@ -30,7 +30,7 @@ public class CifRepository implements ICifRepository {
     //converter convert DB object to an Enity object, which has rules associated with. 
     @Autowired
     private PartyDBToPartyEnity partyDbToEnity;
-    
+
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
 
@@ -43,36 +43,31 @@ public class CifRepository implements ICifRepository {
         }
         return Optional.empty();
     }
-    
+
     // Save opertion 
-    
     //Logic 
     // read the Party Domain Enitity
     // Read the domain events
     // Publish the domain events
     //Event publish should  maintain the subscriber details
-    
-    @Override 
-    public boolean save(Optional<PartyEntity> optPartyEntity){
-        
-        if (!optPartyEntity.isEmpty()){
+    @Override
+    public boolean save(Optional<PartyEntity> optPartyEntity) {
+
+        if (!optPartyEntity.isEmpty()) {
             Optional<PartyDB> optPartyDB = partyDbToEnity.convert(optPartyEntity);
-             if (!optPartyDB.isEmpty()){
-                 PartyDB partyDB = optPartyDB.get();
-                 iDbService.insert(Optional.of(partyDB));
-                 // TODO publish events
-                 PartyEntity partyEntity = optPartyEntity.get();
-                 partyEntity.getEvents().forEach((e)->{                    
-                     if (e instanceof PartyCreatedEvent){
-                         applicationEventPublisher.publishEvent(e);                     
-                     }          
-                 });
-                 if (!partyEntity.getEvents().isEmpty()){
-                     partyEntity.getEvents().clear();
-                 }
-                 return true;
-             }            
-        }        
+            if (!optPartyDB.isEmpty()) {
+                PartyDB partyDB = optPartyDB.get();
+                iDbService.insert(Optional.of(partyDB));
+                PartyEntity partyEntity = optPartyEntity.get();
+                partyEntity.getEvents().forEach((e) -> {
+                    applicationEventPublisher.publishEvent(e);
+                });
+                if (!partyEntity.getEvents().isEmpty()) {
+                    partyEntity.getEvents().clear();
+                }
+                return true;
+            }
+        }
         return false;
-    }  
+    }
 }
