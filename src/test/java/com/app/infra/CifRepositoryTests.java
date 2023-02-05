@@ -126,4 +126,54 @@ public class CifRepositoryTests {
     }
 
     
+      @Test
+    public void Insert_PartyEntity_failed3(){
+        //Database Insert failed
+        PartyEntity partyEntity =  new PartyEntity("20", Type.SINGLE, "Rd 360 address");
+        PartyCreatedEvent event = new PartyCreatedEvent("20");
+        partyEntity.addNewEvents(event);
+        
+        Optional<PartyEntity> optPartyEntity  = Optional.of(partyEntity);
+        
+        //Mocks 
+        PartyDB partyDB = new PartyDB("20","SINGLE", "2020-01-20:4444", "Rd 360 address");
+        Optional<PartyDB> optPartyDB = Optional.of(partyDB);
+        when(partyToDBEntity.convert(optPartyEntity)).thenReturn(optPartyDB);
+        
+        //DB insert failed 
+        when(idbService.insert(optPartyDB)).thenReturn(Boolean.FALSE);
+        
+        //call the business logic , all the mocks are ready 
+        boolean status = cifRepository.save(optPartyEntity);
+       
+        assertEquals(false,status);
+        
+    }
+    
+    @Test
+    public void Find_party_success1(){
+        //PartyDB
+        PartyDB partyDB = new PartyDB("20","SINGLE", "2020-01-20:4444", "Rd 360 address");
+        PartyEntity partyEntity =  new PartyEntity("20", Type.SINGLE, "Rd 360 address");
+      
+        when(idbService.select("20")).thenReturn(partyDB);
+        when(partyToDBEntity.convert(partyDB)).thenReturn(partyEntity);
+        
+        Optional<PartyEntity> opt = cifRepository.findPartyById("20");
+        assert(opt.isPresent());
+        
+    }
+    
+    @Test
+    public void Find_party_failed1(){
+        //PartyDB
+        PartyDB partyDB = null;
+        
+        when(idbService.select("20")).thenReturn(partyDB);
+               
+        Optional<PartyEntity> opt = cifRepository.findPartyById("20");
+        assert(opt.isEmpty());
+        
+    }
+    
 }

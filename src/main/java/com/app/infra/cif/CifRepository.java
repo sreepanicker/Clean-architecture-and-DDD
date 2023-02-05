@@ -57,15 +57,16 @@ public class CifRepository implements ICifRepository {
             Optional<PartyDB> optPartyDB = partyDbToEnity.convert(optPartyEntity);
             if (!optPartyDB.isEmpty()) {
                 PartyDB partyDB = optPartyDB.get();
-                iDbService.insert(Optional.of(partyDB));
-                PartyEntity partyEntity = optPartyEntity.get();
-                partyEntity.getEvents().forEach((e) -> {
-                    applicationEventPublisher.publishEvent(e);
-                });
-                if (!partyEntity.getEvents().isEmpty()) {
-                    partyEntity.getEvents().clear();
+                if (iDbService.insert(Optional.of(partyDB))) {
+                    PartyEntity partyEntity = optPartyEntity.get();
+                    partyEntity.getEvents().forEach((e) -> {
+                        applicationEventPublisher.publishEvent(e);
+                    });
+                    if (!partyEntity.getEvents().isEmpty()) {
+                        partyEntity.getEvents().clear();
+                    }
+                    return true;
                 }
-                return true;
             }
         }
         return false;
