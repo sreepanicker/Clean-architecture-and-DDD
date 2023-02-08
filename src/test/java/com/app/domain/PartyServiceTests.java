@@ -38,7 +38,7 @@ public class PartyServiceTests {
     public void merge_party_success1() {
         
         
-       PartyEntity partyEntity = partyService.merge(partyEntityPri, partyEntityPri);
+       PartyEntity partyEntity = partyService.merge(partyEntityPri, partyEntitySec);
        Assertions.assertEquals(null,partyEntity);
 
     }
