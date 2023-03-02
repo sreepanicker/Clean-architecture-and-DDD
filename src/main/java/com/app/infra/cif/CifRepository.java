@@ -10,6 +10,7 @@ import com.app.domain.cif.PartyEntity;
 import com.app.infra.cif.convertors.IDbService;
 import com.app.infra.cif.convertors.PartyDBToPartyEnity;
 import com.app.infra.cif.db.PartyDB;
+import com.app.infra.cif.messaging.ActiveMQMessagePublisher;
 import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,10 @@ public class CifRepository implements ICifRepository {
 
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
+    
+    //TODO tight coupling - Need to refactor
+    @Autowired
+    private ActiveMQMessagePublisher activeMQPublisher;
 
     @Override
     public Optional<PartyEntity> findPartyById(String id) {
@@ -61,6 +66,13 @@ public class CifRepository implements ICifRepository {
                     PartyEntity partyEntity = optPartyEntity.get();
                     partyEntity.getEvents().forEach((e) -> {
                         applicationEventPublisher.publishEvent(e);
+                        //TODO - need to implement stratgey and composit pattern 
+                        // Need to refactor the code 
+                        
+                        if (e instanceof PartyCreatedEvent){
+                            activeMQPublisher.publish(e);
+                        }
+                        
                     });
                     if (!partyEntity.getEvents().isEmpty()) {
                         partyEntity.getEvents().clear();

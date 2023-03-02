@@ -5,12 +5,13 @@
 package com.app.domain.cif;
 
 import com.app.domain.Event;
+import java.io.Serializable;
 
 /**
  *
  * @author sreep
  */
-public class PartyCreatedEvent extends Event{
+public class PartyCreatedEvent extends Event implements  Serializable{
     private String partyID ;
     public PartyCreatedEvent(String id){
         this.partyID = id;

@@ -11,6 +11,7 @@ import com.app.infra.cif.CifRepository;
 import com.app.infra.cif.convertors.IDbService;
 import com.app.infra.cif.convertors.PartyDBToPartyEnity;
 import com.app.infra.cif.db.PartyDB;
+import com.app.infra.cif.messaging.ActiveMQMessagePublisher;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,6 +45,9 @@ public class CifRepositoryTests {
     
     @Mock
     ApplicationEventPublisher appEvent;
+    
+    @Mock
+    private ActiveMQMessagePublisher actMQPub;
     
     
     @BeforeEach
@@ -88,6 +92,7 @@ public class CifRepositoryTests {
         
         //Mocks - Event publishing 
         doNothing().when(appEvent).publishEvent(event);
+        doNothing().when(actMQPub).publish(event);
        
         
         //call the business logic , all the mocks are ready 
