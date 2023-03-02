@@ -20,3 +20,13 @@ Currently, application implemented following usecases
  * UpdatePartyAddress
 
 Also, in the test folders, it demonstrates how to unit test the domain layer, application layer etc. The program uses Mockitio and Spring-started-test for unit and integration tests. 
+
+In the domain model, there are three impplementations of Party 
+ * Party - an anemic model
+ * PartyEntity - Rich domain model 
+ * PartyAggregate - Concept of Aggregates 
+these are just for demonstration purpose. 
+
+Application also uses two domain event publishing concept, 
+ * In process - Spring specific ; to demonstrates loose coupling with in the layers 
+ * Out of process - ActiveMQ ; between the bounded context. 
