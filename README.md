@@ -1,6 +1,6 @@
 #  Clean-Architecture-and-DDD 
 
-## What is Clean Architecture ?
+## What is Clean Architecture ??
 > According to Robert C Martin - business rules are testable by design and independent of frameworks, databases, UI technologies, and other external applications or interfaces.
 
 ## About the Program  
